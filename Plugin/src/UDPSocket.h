@@ -9,12 +9,14 @@
 #include <arpa/inet.h>
 #include "SensorPackets.h"
 
+#include "Core/Vector3.h"
+
 class UDPSocket
 {
 	public:
 		UDPSocket();
 		UDPSocket(char* groupAddress, uint16_t port);
-		void Send(SensorPacketType PacketType, double CurrentTime, void* data, uint16_t length);
+		void Send(SensorPacketType PacketType, Anvel::Vector3 SensorLocation, double CurrentTime, void* data, uint16_t length);
 
 	private:
 		struct sockaddr_in m_addr;

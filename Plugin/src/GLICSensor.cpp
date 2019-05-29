@@ -142,13 +142,13 @@ namespace Anvel
 					for(int i = 0; i < pointCloud->size()/pc_frag_size; i++)
 					{
 						//m_udpSocket.Send(SensorPacketType::LIDAR, 0, pointCloud->data(), pointCloud->size()*sizeof(Point));
-						m_udpSocket.Send(SensorPacketType::LIDAR, 0, &pointCloud->data()[i*pc_frag_size], pc_frag_size*sizeof(Point));
+						m_udpSocket.Send(SensorPacketType::LIDAR, lidarPosition, 0, &pointCloud->data()[i*pc_frag_size], pc_frag_size*sizeof(Point));
 					}
 					//don't forget remainder if any
 					uint32_t remainder = pointCloud->size()%pc_frag_size;
 					if(remainder > 0)
 					{
-						m_udpSocket.Send(SensorPacketType::LIDAR, 0, &pointCloud->data()[pc_size-remainder], remainder*sizeof(Point));
+						m_udpSocket.Send(SensorPacketType::LIDAR, lidarPosition, 0, &pointCloud->data()[pc_size-remainder], remainder*sizeof(Point));
 					}
 					
 					sprintf(buff, "lidar buff size: %d", pointCloud->size());

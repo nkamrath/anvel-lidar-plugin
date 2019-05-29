@@ -14,6 +14,9 @@ struct SensorDataPacket
 {
 	uint16_t SequenceNumber;
 	double Timestamp;
+	double LocationX;
+	double LocationY;
+	double LocationZ;
 	SensorPacketType PacketType;
 	uint16_t PayloadLength;
 	uint8_t Payload[];

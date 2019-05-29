@@ -19,7 +19,7 @@ UDPSocket::UDPSocket(char* groupAddress, uint16_t port)
 	}
 }
 
-void UDPSocket::Send(SensorPacketType PacketType, double CurrentTime, void* data, uint16_t length)
+void UDPSocket::Send(SensorPacketType PacketType, Anvel::Vector3 SensorLocation, double CurrentTime, void* data, uint16_t length)
 {
 	SensorDataPacket* packet = (SensorDataPacket*) malloc(sizeof(SensorDataPacket) + length);
 
@@ -28,6 +28,9 @@ void UDPSocket::Send(SensorPacketType PacketType, double CurrentTime, void* data
 
 	packet->Timestamp = CurrentTime;
 	packet->PacketType = PacketType;
+	packet->LocationX = SensorLocation.x;
+	packet->LocationY = SensorLocation.y;
+	packet->LocationZ = SensorLocation.z;
 	packet->PayloadLength = length;
 	memcpy(packet->Payload, data, length);
 
